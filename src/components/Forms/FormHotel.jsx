@@ -1,26 +1,36 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
-const FormHotel = ({ setisVisible, handleSend, initialData }) => {
-  const { register, handleSubmit } = useForm({ defaultValues: initialData });
-  const [enabled, setenabled] = useState(initialData?initialData.enabled:false)
+const FormHotel = ({
+  setisVisible,
+  handleSend,
+  initialData,
+  setInitialData,
+}) => {
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: initialData,
+  });
+  const [enabled, setenabled] = useState(
+    initialData ? initialData.enabled : false
+  );
   const closeModal = (e) => {
     e.preventDefault();
     setisVisible(false);
+    reset();
+    setInitialData(null);
   };
 
-   const changeEnabled=()=>{
-
-    setenabled(!enabled)
-   }
+  const changeEnabled = () => {
+    setenabled(!enabled);
+  };
   return (
     <div
       style={{ background: "rgb(0 0 0 / 56%)" }}
       className=" absolute inset-0 w-screen h-screen flex justify-center items-center"
     >
-      <div className="border p-4 rounded-xl text-stone-300">
+      <div className="shadow-lg shadow-stone-400 p-4 rounded-xl text-stone-300 bg-stone-800">
         <h2 className="text-center text-2xl font-bold">Nuevo hotel</h2>
-        <form className="mt-5" action="" onSubmit={handleSubmit(handleSend)}>
+        <form className="mt-5 space-y-3" action="" onSubmit={handleSubmit(handleSend)}>
           <div className="flex flex-col space-y-1 ">
             <label htmlFor="nombre">Nombre</label>
             <input
@@ -39,10 +49,19 @@ const FormHotel = ({ setisVisible, handleSend, initialData }) => {
               {...register("rooms")}
             />
           </div>
-          <div className="flex justify-center items-center">
-            <input type="checkbox" {...register("enabled")} onClick={changeEnabled} className="toggle toggle-sm toggle-success" checked={enabled} />
+          <div className="flex justify-between items-center">
+            <h3>{enabled?"Habilitado":"Desahabilitado"}</h3>
+            <input
+              type="checkbox"
+              {...register("enabled")}
+              onClick={changeEnabled}
+              className="toggle toggle-sm toggle-success"
+              checked={enabled}
+            />
           </div>
-          <button className="w-full btn mt-5 btn-sm">{initialData?"Actualizar":"Registrar"}</button>
+          <button className="w-full btn mt-5 btn-sm">
+            {initialData ? "Actualizar" : "Registrar"}
+          </button>
           <button
             className="w-full btn mt-5 btn-warning btn-sm"
             onClick={closeModal}

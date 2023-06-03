@@ -1,6 +1,12 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Login = () => {
+    const navigate=useNavigate()
+    const loginUser=()=>
+    {
+        navigate("/hotels")
+    }
     return (
         <div className='flex justify-center items-center w-screen h-screen bg-white'>
             <div className=' flex  xl:flex-row  flex-col space-y-10 w-7/12  items-center justify-center bg-white rounded-md shadow-md shadow-slate-300 py-8 '>
@@ -20,7 +26,7 @@ const Login = () => {
 
                         <div className='flex flex-col space-y-2'><label htmlFor="password">Password</label>
                             <input id='password' type="password" placeholder="Enter password" className="h-10 input bg-white input-bordered input-xs w-full" /></div>
-                        <button className='btn w-full bg-blue-600 border-none text-white'>Start now</button>
+                        <button className='btn w-full bg-blue-600 border-none text-white' onClick={loginUser}>Start now</button>
                         <button className='btn btn-outline flex items-center justify-center'><img className='w-1/12' src="https://cdn.worldvectorlogo.com/logos/google-g-2015.svg" alt="" />Sign with Google</button>
                     </form>
                 </div>
