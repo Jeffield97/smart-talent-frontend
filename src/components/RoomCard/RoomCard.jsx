@@ -4,7 +4,7 @@ const colorRoom = ["rgb(8 149 136)", "rgb(149 34 8)"];
 const RoomCard = ({ room, handleEdit, seteditingUser,openModal,handleReserv }) => {
 
   return (
-    <div className="card flex flex-col shadow-sm shadow-stone-500 rounded-xl p-5 text-stone-600 bg-slate-200 my-5">
+    <div className="card flex flex-col shadow-md shadow-stone-950 rounded-xl p-5 text-stone-600 bg-slate-200 my-5">
       <h2 className="font-bold text-center">Habitación {room.id}</h2>
       <div className="text-center my-3">
         <i
@@ -29,6 +29,7 @@ const RoomCard = ({ room, handleEdit, seteditingUser,openModal,handleReserv }) =
         Editar
       </button>
       <button
+      disabled={room.reservada || !room.enabled}
         className="btn btn-xs my-2 text-stone-900 btn-outline hover:bg-blue-900 hover:text-slate-50"
         onClick={() => handleReserv(room)}
       >

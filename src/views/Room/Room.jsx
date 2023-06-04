@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import RoomCard from "../../components/RoomCard/RoomCard";
 import FormRoom from "../../components/Forms/FormRoom";
 import Modal from "../../components/ModalCreate/Modal";
@@ -25,18 +25,26 @@ const rooms = [
   },
   { id: 5, enabled: true, reservada: true, costo: 2440, impuesto: 12, tipo: 1 },
   { id: 6, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
+  { id: 7, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
+  { id: 8, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
+  { id: 9, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
+  { id: 10, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
+  { id: 11, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
+  { id: 12, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
 ];
-
-// const [editingRoom, seteditingRoom] = useState(undefined);
 
 const Room = () => {
   const [isVisible, setisVisible] = useState(false);
   const [isVibileForm, setisVibileForm] = useState(false);
   const [editingRoom, seteditingRoom] = useState(undefined);
+  const navigate = useNavigate()
+  const openModal = () => {
+    setisVisible(true);
+  };
 
   const handleEdit = (data) => {
     seteditingRoom(data);
-    console.log(data);
+    console.log({data});
     setisVisible(true);
   };
   const handleReserv = (data) => {
@@ -53,12 +61,13 @@ const Room = () => {
   };
   const { id } = useParams();
   return (
-    <div className="bg-slate-500">
-      <div>
-        <h1>Hotel {id}</h1>
+    <div className="w-screen  max-h-full" style={{background:"rgb(50 62 70)"}}>
+      <div className="text-center">
+        <h1 className="text-2xl pt-5 font-extrabold text-slate-200 ">Hotel {id}</h1>
       </div>
-      <div className="flex justify-end">
-        <button className="btn btn-btn m-8">Asignar habitacion</button>
+      <div className="flex justify-between">
+        <button className="btn btn-btn m-8" onClick={()=>navigate("/hotels")}><i className="fa-solid fa-circle-chevron-left"></i>Hoteles</button>
+        <button className="btn btn-btn m-8" onClick={openModal}>Asignar habitacion</button>
       </div>
       <div className="flex flex-wrap justify-evenly space w-8/12 mx-auto ">
         {rooms.map((room) => (
@@ -69,7 +78,9 @@ const Room = () => {
             handleReserv={handleReserv}
           ></RoomCard>
         ))}
-        {isVisible && (
+        
+      </div>
+      {isVisible && (
           <Modal isVisible={isVisible}>
             <FormRoom
               setisVisible={setisVisible}
@@ -84,7 +95,6 @@ const Room = () => {
             <FormClient closeModal={() => setisVibileForm(false)} room={editingRoom} handleSend={handleSend} ></FormClient>
           </Modal>
         )}
-      </div>
     </div>
   );
 };

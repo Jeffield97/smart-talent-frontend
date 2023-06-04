@@ -8,7 +8,7 @@ const Login = () => {
         navigate("/hotels")
     }
     return (
-        <div className='flex justify-center items-center w-screen h-screen bg-white'>
+        <div className='flex justify-center items-center w-screen h-screen bg-neutral-100'>
             <div className=' flex  xl:flex-row  flex-col space-y-10 w-7/12  items-center justify-center bg-white rounded-md shadow-md shadow-slate-300 py-8 '>
                 <div className='h-full w-6-12 flex items-center justify-center '><img className='xl:block w-8/12 hidden' src="https://cdn-icons-png.flaticon.com/512/594/594106.png" alt="" /></div>
                 <div className='w-6/12 px-4 flex flex-col items-start justify-center text-slate-600'>

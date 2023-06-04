@@ -29,8 +29,8 @@ const FormRoom = ({
       style={{ background: "rgb(0 0 0 / 56%)" }}
       className=" absolute inset-0 w-screen h-screen flex justify-center items-center"
     >
-      <div className="shadow-lg shadow-stone-400 p-4 rounded-xl text-stone-300 bg-stone-800">
-        <h2 className="text-center text-2xl font-bold">Nuevo hotel</h2>
+      <div className="shadow-md shadow-stone-900 p-4 rounded-xl text-stone-300 bg-stone-800">
+        <h2 className="text-center text-2xl font-bold">{initialData?"Editar":"Nueva habitacion"}</h2>
         <form
           className="mt-5 space-y-3"
           action=""

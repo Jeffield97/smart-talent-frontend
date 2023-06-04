@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 const FormClient = ({closeModal, room, handleSend}) => {
   const { register, handleSubmit } = useForm();
   return (
-    <div className=" w-3/12 mx-auto shadow-lg shadow-stone-400 p-4 rounded-xl text-stone-300 bg-stone-800">
+    <div className=" w-3/12 mx-auto shadow-md shadow-stone-900 p-4 rounded-xl text-stone-300 bg-stone-800">
       <h1 className="text-center font-bold text-2xl">Registrar reserva</h1>
       <form
         className="mt-5 space-y-3 text-stone"
