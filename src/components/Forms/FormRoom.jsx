@@ -13,7 +13,7 @@ const FormRoom = ({
     defaultValues: initialData,
   });
   const [enabled, setenabled] = useState(
-    initialData ? initialData.enabled : false
+    initialData ? initialData.habilitado : false
   );
   const closeModal = (e) => {
     e.preventDefault();
@@ -42,7 +42,7 @@ const FormRoom = ({
               className="bg-white text-stone-800"
               id="nombre"
               type="number"
-              {...register("id")}
+              {...register("numero")}
             />
           </div>
           <div className="flex flex-col space-y-1">
@@ -78,7 +78,7 @@ const FormRoom = ({
             <h3>{enabled ? "Habilitado" : "Desahabilitado"}</h3>
             <input
               type="checkbox"
-              {...register("enabled")}
+              {...register("habilitado")}
               onClick={changeEnabled}
               className="toggle toggle-sm toggle-success"
               checked={enabled}

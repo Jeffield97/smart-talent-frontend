@@ -1,39 +1,16 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import RoomCard from "../../components/RoomCard/RoomCard";
 import FormRoom from "../../components/Forms/FormRoom";
 import Modal from "../../components/ModalCreate/Modal";
 import FormClient from "../../components/Forms/FormClient";
-const rooms = [
-  { id: 1, enabled: true, reservada: true, costo: 2000, impuesto: 12, tipo: 1 },
-  { id: 2, enabled: true, reservada: true, costo: 2300, impuesto: 12, tipo: 2 },
-  {
-    id: 3,
-    enabled: true,
-    reservada: false,
-    costo: 2100,
-    impuesto: 12,
-    tipo: 1,
-  },
-  {
-    id: 4,
-    enabled: true,
-    reservada: true,
-    costo: 25600,
-    impuesto: 12,
-    tipo: 3,
-  },
-  { id: 5, enabled: true, reservada: true, costo: 2440, impuesto: 12, tipo: 1 },
-  { id: 6, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
-  { id: 7, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
-  { id: 8, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
-  { id: 9, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
-  { id: 10, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
-  { id: 11, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
-  { id: 12, enabled: true, reservada: true, costo: 3000, impuesto: 12, tipo: 2 },
-];
+import postRooms from "../../utils/postRooms";
+import getRooms from "../../utils/getRooms";
+import updateRooms from "../../utils/updateRooms";
 
 const Room = () => {
+  const [rooms, setrooms] = useState([{ id: 1, enabled: true, reservada: true, costo: 2000, impuesto: 12, tipo: 1 }])
+
   const [isVisible, setisVisible] = useState(false);
   const [isVibileForm, setisVibileForm] = useState(false);
   const [editingRoom, seteditingRoom] = useState(undefined);
@@ -42,6 +19,14 @@ const Room = () => {
     setisVisible(true);
   };
 
+  const getRoomsHotel= async()=>{
+    const roomsFromHotel= await getRooms(id)
+    setrooms(roomsFromHotel)
+  }
+  useEffect(() => {
+    getRoomsHotel()
+  }, [])
+  
   const handleEdit = (data) => {
     seteditingRoom(data);
     console.log({data});
@@ -51,8 +36,24 @@ const Room = () => {
     seteditingRoom(data);
     setisVibileForm(true);
   };
-  const handleSend = (data) => {
+  const handleSend = async (data) => {
+    data.hotelId=Number(id)
+    data.numero=Number(data.numero)
+    data.costo=Number(data.costo)
+    data.impuesto=Number(data.impuesto)
+    data.tipo=Number(data.tipo)
+    editingRoom?null:data.reservada=false
+    if (editingRoom) {
+      console.log(data.id)
+      await updateRooms(data)
+    } else {
+      data.reservada=false
+      await postRooms(data)
+    }
     console.log(data);
+    
+   
+    await getRoomsHotel(id)
     setisVisible(false);
     setisVibileForm(false);
     seteditingRoom(undefined);
