@@ -40,12 +40,13 @@ const Room = () => {
     setisVisible(true);
   };
   const handleReserv = (data) => {
-    console.log("abriendome")
+    seteditingRoom(data);
     setisVibileForm(true);
   };
   const handleSend = (data) => {
     console.log(data);
     setisVisible(false);
+    setisVibileForm(false);
     seteditingRoom(undefined);
 
     //Call send function
@@ -66,7 +67,6 @@ const Room = () => {
             room={room}
             handleEdit={handleEdit}
             handleReserv={handleReserv}
-
           ></RoomCard>
         ))}
         {isVisible && (
@@ -80,7 +80,9 @@ const Room = () => {
           </Modal>
         )}
         {isVibileForm && (
-          <FormClient closeModal={() => setisVibileForm(false)}></FormClient>
+          <Modal>
+            <FormClient closeModal={() => setisVibileForm(false)} room={editingRoom} handleSend={handleSend} ></FormClient>
+          </Modal>
         )}
       </div>
     </div>

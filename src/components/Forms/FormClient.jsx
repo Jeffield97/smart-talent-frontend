@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const FormClient = ({closeModal}) => {
+const FormClient = ({closeModal, room, handleSend}) => {
   const { register, handleSubmit } = useForm();
   return (
     <div className=" w-3/12 mx-auto shadow-lg shadow-stone-400 p-4 rounded-xl text-stone-300 bg-stone-800">
@@ -9,9 +9,9 @@ const FormClient = ({closeModal}) => {
       <form
         className="mt-5 space-y-3 text-stone"
         action=""
-        onSubmit={handleSubmit()}
+        onSubmit={handleSubmit(handleSend)}
       >
-        <h3>Habitación a reservar {room}</h3>
+        <h3>Habitación a reservar {room?.id}</h3>
         <div className="flex flex-col space-y-1 ">
           <label htmlFor="nombre">Nombre y apellido:</label>
           <input
@@ -40,19 +40,19 @@ const FormClient = ({closeModal}) => {
         </div>
         <div className="flex justify-start space-x-2">
           <label htmlFor="tipoDocumento">Tipo de documento:</label>
-          <select name="" id="tipoDocumento">
-            <option value={"masculino"}>DNI Extranjero</option>
-            <option value={"femenino"}>DNI</option>
+          <select {...register("tipo_documento")} name="" id="tipoDocumento">
+            <option value={"dni_extranjero"}>DNI Extranjero</option>
+            <option value={"dni_local"}>DNI</option>
           </select>
         </div>
         <div className="flex flex-col space-y-1 ">
           <input
             className="bg-white text-stone-800"
-            id="nombre"
+            id="dni"
             type="text"
             maxLength={10}
             placeholder="Ingresa tu documento"
-            {...register("nombre")}
+            {...register("dni")}
           />
         </div>
         <div className="flex flex-col space-y-1 ">
@@ -63,7 +63,7 @@ const FormClient = ({closeModal}) => {
             type="email"
             maxLength={10}
             placeholder="example@email.com"
-            {...register("nombre")}
+            {...register("email")}
           />{" "}
         </div>
         <div className="flex flex-col space-y-1 ">
@@ -74,7 +74,7 @@ const FormClient = ({closeModal}) => {
             type="number"
             maxLength={10}
             placeholder="0987556412"
-            {...register("nombre")}
+            {...register("telephone")}
           />{" "}
         </div>
         <button className="w-full btn mt-5 btn-sm">Reservar</button>
