@@ -10,7 +10,7 @@ import updateRooms from "../../utils/updateRooms";
 import postBooking from "../../utils/postBookings";
 
 const Room = () => {
-  const [rooms, setrooms] = useState([{ id: 1, enabled: true, reservada: true, costo: 2000, impuesto: 12, tipo: 1 }])
+  const [rooms, setrooms] = useState([])
 
   const [isVisible, setisVisible] = useState(false);
   const [isVibileForm, setisVibileForm] = useState(false);
@@ -34,10 +34,8 @@ const Room = () => {
     setisVisible(true);
   };
   const handleSendBooking = async (data)=>{
-    // console.log(editingRoom)
     data.habitacionId=editingRoom.id
     data.hotelId=editingRoom.hotelId
-    // console.log(editingRoom.id)
     await postBooking(data)
    
     setisVibileForm(false)
@@ -47,7 +45,6 @@ const Room = () => {
   const handleReserv = async (data) => {
     data.hotelId=id
     console.log(data)
-    // await postBooking(data)
     seteditingRoom(data);
     setisVibileForm(true);
   };
@@ -65,16 +62,13 @@ const Room = () => {
     } else {
       data.reservada=false
       await postRooms(data)
-    }
-    console.log(data);
-    
+    }    
    
     await getRoomsHotel(id)
     setisVisible(false);
     setisVibileForm(false);
     seteditingRoom(undefined);
 
-    //Call send function
   };
   const { id } = useParams();
   return (

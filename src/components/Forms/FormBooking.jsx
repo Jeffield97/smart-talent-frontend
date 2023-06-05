@@ -31,7 +31,6 @@ const FormClient = ({closeModal, room, handleReserv,handleSendBooking}) => {
           />
         </div>
         <div className="flex justify-start space-x-2">
-          {/* {...register("genero")} */}
           <label htmlFor="genero">Genero:</label>
           <select {...register("genero")} name="" id="genero">
             <option value={"masculino"}>Masculino</option>
