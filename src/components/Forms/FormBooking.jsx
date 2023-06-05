@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-const FormClient = ({closeModal, room, handleSend}) => {
+const FormClient = ({closeModal, room, handleReserv,handleSendBooking}) => {
   const { register, handleSubmit } = useForm();
   return (
     <div className=" w-3/12 mx-auto shadow-md shadow-stone-900 p-4 rounded-xl text-stone-300 bg-stone-800">
@@ -9,9 +9,9 @@ const FormClient = ({closeModal, room, handleSend}) => {
       <form
         className="mt-5 space-y-3 text-stone"
         action=""
-        onSubmit={handleSubmit(handleSend)}
+        onSubmit={handleSubmit(handleSendBooking)}
       >
-        <h3>Habitación a reservar {room?.id}</h3>
+        <h3>Habitación a reservar {room?.numero}</h3>
         <div className="flex flex-col space-y-1 ">
           <label htmlFor="nombre">Nombre y apellido:</label>
           <input
@@ -52,7 +52,7 @@ const FormClient = ({closeModal, room, handleSend}) => {
             type="text"
             maxLength={10}
             placeholder="Ingresa tu documento"
-            {...register("dni")}
+            {...register("documento")}
           />
         </div>
         <div className="flex flex-col space-y-1 ">
@@ -61,7 +61,6 @@ const FormClient = ({closeModal, room, handleSend}) => {
             className="bg-white text-stone-800"
             id="email"
             type="email"
-            maxLength={10}
             placeholder="example@email.com"
             {...register("email")}
           />{" "}
@@ -74,7 +73,7 @@ const FormClient = ({closeModal, room, handleSend}) => {
             type="number"
             maxLength={10}
             placeholder="0987556412"
-            {...register("telephone")}
+            {...register("telefono")}
           />{" "}
         </div>
         <button className="w-full btn mt-5 btn-sm">Reservar</button>

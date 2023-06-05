@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import FormClient from "../Forms/FormClient";
+import FormClient from "../Forms/FormBooking";
 const colorRoom = ["rgb(8 149 136)", "rgb(149 34 8)"];
 const RoomCard = ({ room, handleEdit, seteditingUser,openModal,handleReserv }) => {
 

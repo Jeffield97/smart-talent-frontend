@@ -38,6 +38,13 @@ const HotelCard = ({ hotel, handleEdit }) => {
       >
         Habitaciones
       </button>
+      <button
+      disabled={!hotel.habilitado}
+        className="btn btn-xs my-2 text-stone-900 btn-outline hover:bg-blue-900 hover:text-slate-50"
+        onClick={() => navigate(`/hotel/${hotel.id}/booking`)}
+      >
+        Reservas
+      </button>
     </div>
   );
 };

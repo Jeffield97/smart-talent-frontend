@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../views/Home/Home";
 import Hotel from "../views/Hotel/Hotel";
 import Room from "../views/Room/Room";
+import Booking from "../views/Booking/Booking";
 
 
 export const router = createBrowserRouter([
@@ -12,6 +13,7 @@ export const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "/hotels", element: <Hotel></Hotel> },
       { path: "/rooms/hotel/:id", element: <Room></Room> },
+      { path: "/hotel/:id/booking", element: <Booking></Booking> },
       /*{
         element: <ProtectedRoute></ProtectedRoute>,
         children: [

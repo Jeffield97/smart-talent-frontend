@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import RoomCard from "../../components/RoomCard/RoomCard";
 import FormRoom from "../../components/Forms/FormRoom";
 import Modal from "../../components/ModalCreate/Modal";
-import FormClient from "../../components/Forms/FormClient";
+import FormClient from "../../components/Forms/FormBooking";
 import postRooms from "../../utils/postRooms";
 import getRooms from "../../utils/getRooms";
 import updateRooms from "../../utils/updateRooms";
+import postBooking from "../../utils/postBookings";
 
 const Room = () => {
   const [rooms, setrooms] = useState([{ id: 1, enabled: true, reservada: true, costo: 2000, impuesto: 12, tipo: 1 }])
@@ -32,10 +33,25 @@ const Room = () => {
     console.log({data});
     setisVisible(true);
   };
-  const handleReserv = (data) => {
+  const handleSendBooking = async (data)=>{
+    // console.log(editingRoom)
+    data.habitacionId=editingRoom.id
+    data.hotelId=editingRoom.hotelId
+    // console.log(editingRoom.id)
+    await postBooking(data)
+   
+    setisVibileForm(false)
+    seteditingRoom(null)
+    getRoomsHotel()
+  }
+  const handleReserv = async (data) => {
+    data.hotelId=id
+    console.log(data)
+    // await postBooking(data)
     seteditingRoom(data);
     setisVibileForm(true);
   };
+  
   const handleSend = async (data) => {
     data.hotelId=Number(id)
     data.numero=Number(data.numero)
@@ -93,7 +109,7 @@ const Room = () => {
         )}
         {isVibileForm && (
           <Modal>
-            <FormClient closeModal={() => setisVibileForm(false)} room={editingRoom} handleSend={handleSend} ></FormClient>
+            <FormClient closeModal={() => setisVibileForm(false)} room={editingRoom}  handleReserv={handleReserv} handleSendBooking={handleSendBooking} ></FormClient>
           </Modal>
         )}
     </div>
